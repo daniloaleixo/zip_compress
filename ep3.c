@@ -6,13 +6,11 @@
 #define TRUE 1
 #define FALSE 0
 
-FILE *leEntrada (char *nomeArquivo);
-
 int main(int argc, char **argv)
 {
     int *vetor;
     int i, cont=0;
-	char carac;
+	char carac, c;
 	FILE *entrada;
     vetor = malloc(128*sizeof(int));
 	
@@ -34,8 +32,16 @@ int main(int argc, char **argv)
 	
 	    for(i=1; i<=128; i++)
     {
-        if(vetor[i] != 0)
-            printf("Valor do indice %d: %d\n",i, vetor[i]); /*arrumar indice*/
+		if(i == 10 && vetor[i] != 0)
+		{
+			printf("Numero de ocorrencias do caracter NEW_LINE: %d\n", vetor[i]);
+		}
+		else
+        if(vetor[i] != 0)	
+		{		
+			c = i;
+            printf("Numero de ocorrencias do caracter %c: %d\n",c, vetor[i]);
+		}
     }
     return 0;
 }
