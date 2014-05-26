@@ -1,7 +1,6 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include"StringOps.h"
+#include <string.h>
+#include "StringOps.h"
+#include "Struct.h"
 
 #define TRUE 1
 #define FALSE 0
@@ -11,8 +10,9 @@ int main(int argc, char **argv)
     int *vetor;
     int i, cont=0;
 	char carac, c;
+	Celula *cabCelula;
 	FILE *entrada = NULL;
-    vetor = malloc(127*sizeof(int)); /*existem 127 caracteres na tabela ASCII*/
+    vetor = malloc(128*sizeof(int)); /*existem 127 caracteres na tabela ASCII, eh alocado 128 posicoes pois existe a posicao 0*/
 	
 	if(argc - 1 > 0)
 	{
@@ -28,13 +28,18 @@ int main(int argc, char **argv)
             }
         else break;
     }
-	printf("Numero de caracteres lidos: %d\n", cont);	
+	/*printf("Numero de caracteres lidos: %d\n", cont);	
 	
-	    for(i=1; i<=128; i++)
+	    for(i=1; i<=127; i++)
     {
 		if(i == 10 && vetor[i] != 0)
 		{
 			printf("Numero de ocorrencias do caracter NEW_LINE: %d\n", vetor[i]);
+		}
+		else
+		if(i == 32 && vetor[i] != 0)
+		{
+			printf("Numero de ocorrencias do caracter SPACE: %d\n", vetor[i]);
 		}
 		else
         if(vetor[i] != 0)	
@@ -42,6 +47,9 @@ int main(int argc, char **argv)
 			c = i;
             printf("Numero de ocorrencias do caracter %c: %d\n",c, vetor[i]);
 		}
-    }
+    }*/
+
+	cabCelula = criaListaCelula(vetor);
+	imprimeCelula(cabCelula);
     return 0;
 }

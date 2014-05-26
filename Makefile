@@ -3,7 +3,7 @@ CFLAGS = -Wall -ansi -pedantic -O2 -g
 LFLAGS = -lm
 OUT = ep3
 IN = ep3.c
-OBJS = ep3.o StringOps.o
+OBJS = ep3.o StringOps.o Struct.o
 
 
 all: $(OUT)
@@ -20,5 +20,5 @@ ep3.o: $(IN)
 StringOps.o: StringOps.c
 	$(CC) StringOps.c $(CFLAGS) -c -o StringOps.o
 
-
-
+Struct.o: Struct.c
+	$(CC) Struct.c $(CFLAGS) -c -o Struct.o
