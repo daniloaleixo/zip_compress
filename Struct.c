@@ -3,13 +3,15 @@
 #include <time.h>
 #include "Struct.h"
 
+#define NEW_LINE 10
+#define SPACE 32
+
 
 Celula *criaListaCelula(int *vetor)
 {
 	int i;
 	Celula *cabCelula = malloc(sizeof(Celula));
-	printf("*********************************************************************************************************\n");
-	for(i=1; i<=127; i++)
+	for(i=1; i<=127; i++) /*ignora simbolos especiais*/
     {
 		/*if(i == 10 && vetor[i] != 0)
 		{
@@ -21,8 +23,8 @@ Celula *criaListaCelula(int *vetor)
 			printf("Numero de ocorrencias do caracter SPACE: %d\n", vetor[i]);
 		}
 		else*/
-        if(i != 10 && i != 32 && vetor[i] != 0)	/*precisamos tratar as ocorrencias de NEW_LINE e SPACE*/
-		{		
+        if(vetor[i] != 0)	/*precisamos tratar as ocorrencias de NEW_LINE e SPACE*/
+		{
 			insereCelula(cabCelula, i, vetor[i]);
 		}
 	}
@@ -33,8 +35,21 @@ void insereCelula(Celula *cabCelula, char caracter, int ocorre)
 {
 	Celula *new = malloc(sizeof(Celula));
 
-	new->carac = caracter;
+	switch(caracter)
+	{
+		case NEW_LINE:
+		new->carac = 'NEW_LINE';
+		break;
+
+		case SPACE:
+		new->carac = "SPACE";
+		break;
+
+		default:
+		new->carac = caracter;
+	}	
 	new->ocorrencias = ocorre;
+	printf("Caracter as ser inserido: %d\n", caracter);
 	if(cabCelula->prox == NULL) /*lista vazia*/
     {
         cabCelula->prox = new;
@@ -76,7 +91,13 @@ void imprimeCelula(Celula *cabCelula)
 	{
 		for(imprime = cabCelula->prox; imprime != NULL; imprime = imprime->prox)
 		{
-			printf("Dados da celula atual: Caracter: %c, Numero de ocorrencias: %d\n", imprime->carac, imprime->ocorrencias);
+			if(imprime->carac <= 33)
+				printf("Dados da celula atual: Caracter: %s, Numero de ocorrencias: %d\n", imprime->carac, imprime->ocorrencias);
+			else
+				printf("Dados da celula atual: Caracter: %c, Numero de ocorrencias: %d\n", imprime->carac, imprime->ocorrencias);
+			printf("FINAL DO FOR********************\n");
+			usleep(360000);
 		}
+		printf("SAI DO FOR*******************\n");
 	}	
 }
