@@ -14,6 +14,8 @@ typedef struct no {
 } No;
 
 Celula *criaListaCelula(int *vetor); /*recebe um array como parametro e insere numa lista encadeada cada caracter com numero de ocorrencias diferente de zero*/
+void insereCelula(Celula *cabCelula, char caracter, int ocorre);
+Celula *removeMenor(Celula *cabCelula);
 void imprimeCelula(Celula *cabCelula); 
 
 #endif

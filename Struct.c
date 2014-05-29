@@ -6,21 +6,9 @@
 
 Celula *criaListaCelula(int *vetor)
 {
-	int i; 
-	char c;
+	int i;
 	Celula *cabCelula = malloc(sizeof(Celula));
-	Celula *aux;
-	Celula *nova = malloc(sizeof(Celula));
-	Celula *aux1 = malloc(sizeof(Celula));
-	Celula *aux2 = malloc(sizeof(Celula));
-	cabCelula->ocorrencias = 42;
-	cabCelula->carac = 'A';
-	aux1->ocorrencias = 43;
-	aux1->carac = 'B';
-	aux2->ocorrencias = 44;	
-	aux2->carac = 'C';
-	cabCelula->prox = aux1;
-	cabCelula->prox->prox = aux2;
+	printf("*********************************************************************************************************\n");
 	for(i=1; i<=127; i++)
     {
 		/*if(i == 10 && vetor[i] != 0)
@@ -35,52 +23,60 @@ Celula *criaListaCelula(int *vetor)
 		else*/
         if(i != 10 && i != 32 && vetor[i] != 0)	/*precisamos tratar as ocorrencias de NEW_LINE e SPACE*/
 		{		
-			c = i;
-			nova->carac = c;
-			nova->ocorrencias = vetor[i];
-			nova->prox = NULL;
-			usleep(15000);/*1500000*/
-			if(cabCelula->prox == NULL) /*lista vazia*/
-			{
-				cabCelula->prox = nova;
-				printf("Inserido primeiro elemento da lista\n");
-				printf("Celula inserida: %c, %d\n", nova->carac, nova->ocorrencias);
-			}
-			else
-	    	{		        
-		        aux = cabCelula->prox; /*aux deve estar com carac = 'B'*/
-				printf("ELSE\n");
-		        while(aux->prox != NULL)
-		        {
-					printf("WHILE\n");
-					printf("Dados da celula atual: %c %d\n",aux->carac, aux->ocorrencias);
-		            aux = aux->prox;		           
-		        }
-		        aux->prox = nova;
-		        printf("Celula inserida: %c, %d\n", nova->carac, nova->ocorrencias);
-    		}
-			printf("saiu do else\n");
-			printf("**************************************************************\n");
-			imprimeCelula(cabCelula);
-			printf("**************************************************************\n");
+			insereCelula(cabCelula, i, vetor[i]);
 		}
 	}
-
 	return cabCelula;
 }
 
+void insereCelula(Celula *cabCelula, char caracter, int ocorre)
+{
+	Celula *new = malloc(sizeof(Celula));
+
+	new->carac = caracter;
+	new->ocorrencias = ocorre;
+	if(cabCelula->prox == NULL) /*lista vazia*/
+    {
+        cabCelula->prox = new;
+    }
+    else /*como a lista nao esta vazia, insere-se a celula na lista em ordem crescente*/
+    {
+    	Celula *aux = cabCelula->prox;
+    	if(new->ocorrencias <= aux->ocorrencias) /*elemento a ser inserido eh menor que o primeiro elemento da lista*/
+    											 /*logo ele deve se tornar o primeiro elemento*/
+    	{
+    		new->prox = aux;
+    		cabCelula->prox = new;
+    	}
+    	else
+    	{    		
+    		Celula *ant = aux;
+    		while(new->ocorrencias > aux->ocorrencias && aux->prox != NULL)
+    		{
+    			ant = aux;
+    			aux = aux->prox;
+    		}
+    		ant->prox = new;
+    		new->prox = aux;
+    	}
+    }
+}
+
+Celula *removeMenor(Celula *cabCelula) /*como a lista esta ordenada em ordem crescente, basta remover o primeiro elemento da lista*/
+{
+	Celula *temp = cabCelula->prox;
+	cabCelula->prox = temp->prox;
+	return temp;
+}
 
 void imprimeCelula(Celula *cabCelula)
 {
 	Celula *imprime;
-	printf("Entrou no imprime\n");
-	usleep(1500000);
 	if(cabCelula != NULL)
 	{
-		for(imprime = cabCelula; imprime != NULL; imprime = imprime->prox)
+		for(imprime = cabCelula->prox; imprime != NULL; imprime = imprime->prox)
 		{
 			printf("Dados da celula atual: Caracter: %c, Numero de ocorrencias: %d\n", imprime->carac, imprime->ocorrencias);
-			usleep(150000);
 		}
 	}	
 }

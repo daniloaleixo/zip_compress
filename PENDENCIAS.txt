@@ -1,0 +1,6 @@
+* precisamos decidir como tratar caracteres como espaço e nova linha, pois precisamos guardar em uma variavel do tipo char
+
+*ate agora temos uma lista encadeada em ordem crescente e uma funcao para remover o primeiro elemento
+ se mantivermos a lista sempre ordenada, basta chamar essa funcao de remocao duas vezes para somar e formarmos o nó
+
+*temos tambem a struct dos nós, então o proximo passo seria montar a arvore.
