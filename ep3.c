@@ -8,7 +8,6 @@ int main(int argc, char **argv)
 {
     int *vetor, *acabou = 0;
 	unsigned char carac;
-	int entradaCorreta = TRUE;
 
 	No *teste;
 	Celula *cabCelula;
@@ -19,14 +18,9 @@ int main(int argc, char **argv)
 	if(argc - 1 > 0)
 	{
 		entrada = leEntrada(argv[1]);
-	} else {
-		entradaCorreta = FALSE;
-		printf("\nModo de utilização:\n\n");
-		printf("	ep3 <arquivo_para_compactacao>\n\n");
-	}
-	
-	if(entradaCorreta)
-	{
+
+		/* 	Colocamos toda a informacao do arquivo no vetor "vetor"
+		ate o fim do arquivo */
 		while(TRUE)
     	{
 			if((fscanf(entrada, "%c", &carac)) != EOF)
@@ -40,6 +34,10 @@ int main(int argc, char **argv)
 		imprimeCelula(cabCelula);
 
 		teste = criaNo(cabCelula, acabou);
+	}
+	else {
+		printf("\nModo de utilização:\n\n");
+		printf("	ep3 <arquivo_para_compactacao>\n\n");
 	}
 	
 
