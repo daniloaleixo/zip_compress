@@ -17,6 +17,7 @@ int main(int argc, char **argv)
 	
 	if(argc - 1 > 0)
 	{
+		/* Lemos a entrada */
 		entrada = leEntrada(argv[1]);
 
 		/* 	Colocamos toda a informacao do arquivo no vetor "vetor"
@@ -30,10 +31,12 @@ int main(int argc, char **argv)
 	        else break;
 	    }
 
+	    /* Criamos uma lista encadeada com o caracter e 
+	       e seu numero de occorencias */
 		cabCelula = criaListaCelula(vetor);
 		imprimeCelula(cabCelula);
 
-		teste = criaNo(cabCelula, acabou);
+		/*teste = criaNo(cabCelula, acabou);*/
 	}
 	else {
 		printf("\nModo de utilização:\n\n");

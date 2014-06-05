@@ -52,7 +52,7 @@ void insereCelulaInicial(Celula *cabCelula, char caracter, int ocorre)
 		new->carac = s;
 	}	
 	new->ocorrencias = ocorre;
-	printf("Caracter as ser inserido: %d\n", caracter);
+	/*printf("Caracter as ser inserido: %d\n", caracter);*/
 	if(cabCelula->prox == NULL) /*lista vazia*/
     {
         cabCelula->prox = new;
@@ -60,8 +60,10 @@ void insereCelulaInicial(Celula *cabCelula, char caracter, int ocorre)
     else /*como a lista nao esta vazia, insere-se a celula na lista em ordem crescente*/
     {
     	Celula *aux = cabCelula->prox;
-    	if(new->ocorrencias <= aux->ocorrencias) /*elemento a ser inserido eh menor que o primeiro elemento da lista*/
-    											 /*logo ele deve se tornar o primeiro elemento*/
+
+    	/*elemento a ser inserido eh menor que o primeiro elemento da lista*/
+   		/*logo ele deve se tornar o primeiro elemento*/
+    	if(new->ocorrencias <= aux->ocorrencias) 
     	{
     		new->prox = aux;
     		cabCelula->prox = new;
@@ -74,8 +76,14 @@ void insereCelulaInicial(Celula *cabCelula, char caracter, int ocorre)
     			ant = aux;
     			aux = aux->prox;
     		}
-    		ant->prox = new;
-    		new->prox = aux;
+    		if(aux->prox == NULL && aux->ocorrencias < new->ocorrencias)
+    		{
+    			aux->prox = new;
+    		} else {
+	    		ant->prox = new;
+	    		new->prox = aux;
+    		}
+
     	}
     }
 }
@@ -134,8 +142,7 @@ void imprimeCelula(Celula *cabCelula)
 			if(imprime->carac <= 33)
 				printf("Dados da celula atual: Caracter: %s, Numero de ocorrencias: %d\n", imprime->carac, imprime->ocorrencias);
 			else
-				printf("Dados da celula atual: Caracter: %c, Numero de ocorrencias: %d\n", imprime->carac, imprime->ocorrencias);
-			printf("FINAL DO FOR********************\n");
+				printf("Dados da celula atual: Caracter: %s, Numero de ocorrencias: %d\n", imprime->carac, imprime->ocorrencias);
 			/*usleep(360000);*/
 		}
 		/*printf("SAI DO FOR*******************\n");*/
