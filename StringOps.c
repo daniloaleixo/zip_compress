@@ -29,40 +29,27 @@ void * mallocSafe (size_t n)
 
 char *concatenaStrings(char *original, char *add)
 {
-  char *novaString;
-  int i = 0;
-  printf("%d\n", i);
-  printf("ori: %s, add: %s\n", original, add);
 
-  int tamanho = strlen(original) + strlen(add);
-  printf("Tamanho: %d\n", tamanho);
+  char *novaString;
+  int i = 0, j = 0;
+
+  int tamanho = strlen(original) + strlen(add) + 1;
   novaString = malloc(tamanho*sizeof(char));
 
-printf("passei\n");
-   while(*original != '\0')
-   {
-
-      novaString[i] = original[i];
-      printf("novaString: %d, ori: %d\n", novaString[i], original[i]);
-      i++;
-   }      
- printf("ok ate aqui\n");
-   while(*add != '\0')
-   {
-      novaString[i] = add++;
-      i++;
-   }
-
-   novaString[i] = '\0';
+  while(original[i] != '\0')
+  {
+    novaString[i] = original[i];
+    i++;
+  }      
 
 
-   printf("String gerada: ");
-   for(i=0; i< tamanho; i++)
-   {
-    printf(" %d", novaString[i]);
-   }
+  while(add[j] != '\0')
+  {
+    novaString[i] = add[j];
+    i++; j++;
+  }
 
-   printf("\n");
+  novaString[tamanho - 1] = '\0';
 
-   return novaString;
+  return novaString;
 }

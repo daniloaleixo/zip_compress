@@ -17,6 +17,7 @@ Celula *criaListaCelula(int *vetor); /*recebe um array como parametro e insere n
 void insereCelulaInicial(Celula *cabCelula, char caracter, int ocorre);
 void insereCelula(Celula *cabCelula, char *caracter, int ocorre);
 Celula *removeMenor(Celula *cabCelula);
-void imprimeCelula(Celula *cabCelula); 
+void imprimeCelula(Celula *cabCelula);
+No *criaNo(Celula *cabCelula, int *flagAcabou); 
 
 #endif

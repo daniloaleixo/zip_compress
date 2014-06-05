@@ -153,6 +153,7 @@ No *criaNo(Celula *cabCelula, int *flagAcabou)
 {
 	No *nova;
 	Celula *c0, *c1;
+
 	if(cabCelula->prox != NULL)
 	{
 		c0 = removeMenor(cabCelula);
@@ -162,7 +163,7 @@ No *criaNo(Celula *cabCelula, int *flagAcabou)
 		}
 		else
 		{
-			flagAcabou = 1;
+			*flagAcabou = 1;
 		}
 	}
 	else
@@ -170,14 +171,21 @@ No *criaNo(Celula *cabCelula, int *flagAcabou)
 		printf(stderr,"Lista vazia************************************\n");
 	}
 
-	printf("c0->carac: %s, c1->carac: %s\n", c0->carac, c1->carac);
 
-	concatenaStrings(c0->carac, c1->carac); /*atribui os valores do NO criado*/
-	nova->carac = c0->carac;
-	nova->probabilidade = c0->ocorrencias + c1->ocorrencias;	
+	if(*flagAcabou == 0)
+	{
+		/* Criamos um novo Nó que eh a concatenacao da duas menores celulas */
+		nova->carac = concatenaStrings(c0->carac, c1->carac); 
+		nova->probabilidade = c0->ocorrencias + c1->ocorrencias;	
 
-	insereCelula(cabCelula, nova->carac, nova->probabilidade); /*reinsere os dados do NO criado na lista encadeada*/
+		insereCelula(cabCelula, nova->carac, nova->probabilidade); /*reinsere os dados do NO criado na lista encadeada*/
 
-	printf("Dados do NO criado: %s, %d\n", nova->carac, nova->probabilidade);
+		/* DEPURACAO printf("Lista apos a insercao do no concatenado: \n");
+		imprimeCelula(cabCelula);*/
+
+		printf("Dados do NO criado: %s, %d\n", nova->carac, nova->probabilidade);
+	}
+
+	
 	return nova;	
 }

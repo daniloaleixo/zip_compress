@@ -6,7 +6,7 @@
 
 int main(int argc, char **argv)
 {
-    int *vetor, *acabou = 0;
+    int *vetor, acabou = 0;
 	unsigned char carac;
 
 	No *teste;
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 		cabCelula = criaListaCelula(vetor);
 		imprimeCelula(cabCelula);
 
-		/*teste = criaNo(cabCelula, acabou);*/
+		teste = criaNo(cabCelula, &acabou);
 	}
 	else {
 		printf("\nModo de utilização:\n\n");
