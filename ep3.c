@@ -37,6 +37,7 @@ int main(int argc, char **argv)
 		imprimeCelula(cabCelula);
 
 		teste = criaNo(cabCelula, &acabou);
+		imprimeCelula(cabCelula);
 	}
 	else {
 		printf("\nModo de utilização:\n\n");

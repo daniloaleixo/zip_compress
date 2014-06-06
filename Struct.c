@@ -174,8 +174,10 @@ No *criaNo(Celula *cabCelula, int *flagAcabou)
 
 	if(*flagAcabou == 0)
 	{
-		/* Criamos um novo Nó que eh a concatenacao da duas menores celulas */
-		nova->carac = concatenaStrings(c0->carac, c1->carac); 
+		/* Criamos um novo Nó que eh a concatenacao da duas menores celulas
+			o c1 vem primeiro porque ele eh o segundo menor, seguido
+			do menor que eh c0 */
+		nova->carac = concatenaStrings(c1->carac, c0->carac); 
 		nova->probabilidade = c0->ocorrencias + c1->ocorrencias;	
 
 		insereCelula(cabCelula, nova->carac, nova->probabilidade); /*reinsere os dados do NO criado na lista encadeada*/
